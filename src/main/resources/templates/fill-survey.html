@@ -23,7 +23,6 @@
         <p th:text="${message}"></p>
     </div>
 
-
     <div>
         <label>Full Names:</label>
         <input type="text" th:field="*{fullName}" />
@@ -38,7 +37,7 @@
 
     <div>
         <label>Date of Birth:</label>
-        <input type="date" th:field="*{dateOfBirth}"
+        <input type="date" id="dob" th:field="*{dateOfBirth}"
                th:min="${minDate}" th:max="${maxDate}" />
         <p class="error-message" th:errors="*{dateOfBirth}"></p>
     </div>
@@ -147,6 +146,35 @@
                 popup.style.display = 'none';
             }, 4000);
         }
+
+        document.querySelector("form").addEventListener("submit", function (event) {
+            // Clear all existing error messages first
+            document.querySelectorAll('.error-message').forEach(el => {
+                el.textContent = '';
+            });
+
+            const dobInput = document.getElementById("dob");
+
+            if (dobInput && dobInput.value) {
+                const dob = new Date(dobInput.value);
+                const today = new Date();
+
+                let age = today.getFullYear() - dob.getFullYear();
+                const m = today.getMonth() - dob.getMonth();
+                if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
+                    age--;
+                }
+
+                if (age < 5 || age > 120) {
+                    event.preventDefault();
+
+                    const dobErrorElement = dobInput.parentElement.querySelector('.error-message');
+                    if (dobErrorElement) {
+                        dobErrorElement.textContent = 'Age must be between 5 and 120.';
+                    }
+                }
+            }
+        });
     });
 </script>
 
