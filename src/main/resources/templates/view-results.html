@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Survey Results</title>
+    <link rel="stylesheet" href="/css/styles.css"/>
+</head>
+<body>
+<header>
+    <div class="nav-bar">
+        <span class="logo">_Surveys</span>
+        <nav>
+            <a th:href="@{/}">FILL OUT SURVEY</a>
+            <a class="active">VIEW SURVEY RESULTS</a>
+        </nav>
+    </div>
+</header>
+
+<h1>Survey Results</h1>
+
+<div class="results-container">
+    <div th:if="${noDataMessage != null}">
+        <p th:text="${noDataMessage}"></p>
+    </div>
+
+    <div class="results-container">
+        <div th:if="${noDataMessage != null}">
+            <p th:text="${noDataMessage}"></p>
+        </div>
+
+      
+        <div th:if="${noDataMessage == null}">
+            <div class="result-row"><div class="label">📋 Total number of surveys:</div><div class="value" th:text="${totalSurveys}"></div></div>
+            <div class="result-row"><div class="label">🎂 Average Age:</div><div class="value" th:text="${averageAge} + ' years'"></div></div>
+            <div class="result-row"><div class="label">👵 Oldest person:</div><div class="value" th:text="${maxAge} + ' years'"></div></div>
+            <div class="result-row"><div class="label">🧒 Youngest person:</div><div class="value" th:text="${minAge} + ' years'"></div></div>
+
+            <br>
+
+            <div class="result-row"><div class="label">🍕 % like Pizza:</div><div class="value" th:text="${percentPizza} + '%'"></div></div>
+            <div class="result-row"><div class="label">🍝 % like Pasta:</div><div class="value" th:text="${percentPasta} + '%'"></div></div>
+            <div class="result-row"><div class="label">🍽️ % like Pap and Wors:</div><div class="value" th:text="${percentPapAndWors} + '%'"></div></div>
+
+            <br>
+
+            <div class="result-row"><div class="label">🎬 Avg rating (watch movies):</div><div class="value" th:text="${avgMovies}"></div></div>
+            <div class="result-row"><div class="label">📻 Avg rating (listen to radio):</div><div class="value" th:text="${avgRadio}"></div></div>
+            <div class="result-row"><div class="label">🍽️ Avg rating (eat out):</div><div class="value" th:text="${avgEatOut}"></div></div>
+            <div class="result-row"><div class="label">📺 Avg rating (watch TV):</div><div class="value" th:text="${avgWatchTV}"></div></div>
+        </div>
+    </div>
+
+
+</div>
+
+</div>
+</body>
+</html>
